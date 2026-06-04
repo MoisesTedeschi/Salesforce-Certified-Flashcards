@@ -51,14 +51,14 @@ Não requer instalação, servidor local ou banco de dados externo.
 2. **Leitura**: o cronômetro inicia em 15 segundos para a questão atual
 3. **Revelação**: clique no cartão para visualizar a resposta; o tempo é pausado neste momento
 4. **Avaliação**: escolha honestamente se **Acertou** ou **Errou** a questão conceitualmente
-5. **Vitória**: conclua as 60 questões sem perder todas as vidas para atingir o status de **Certificado!** 🏆
+5. **Vitória**: conclua as 60 questões sem perder todas as vidas para atingir o status de **"Certificado!"** 🏆
 
 ---
 
 ## 🛠️ Tecnologias Utilizadas
 
-- **HTML5**: estrutura semântica e acessível
-- **CSS3 (Customizado)**: layout responsivo, animações de rotação 3D (`perspective` e `backface-visibility`), gradientes e design Glassmorphism
-- **JavaScript (ES6+)**: lógica completa de controle de estado do jogo, gestão do cronômetro, tradução em tempo real e embaralhamento do deck a cada partida
-- **Font Awesome**: ícones vetoriais modernos
-- **Google Fonts (Plus Jakarta Sans)**: tipografia de alta legibilidade
+- **HTML5**: estrutura semântica e acessível;
+- **CSS3 (Customizado)**: layout responsivo, animações de rotação 3D (`perspective` e `backface-visibility`), gradientes e design Glassmorphism;
+- **JavaScript (ES6+)**: lógica completa de controle de estado do jogo, gestão do cronômetro, tradução em tempo real e embaralhamento do deck a cada partida;
+- **Font Awesome**: ícones vetoriais modernos;
+- **Google Fonts (Plus Jakarta Sans)**: tipografia de alta legibilidade.
