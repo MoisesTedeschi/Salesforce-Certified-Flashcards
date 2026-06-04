@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salesforce Certified - Flashcards Challenge</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <div class="game-wrapper">
+        <!-- Top Navigation & Language Selector -->
+        <div class="top-navbar">
+            <div class="brand">
+                <i class="fa-solid fa-cloud-bolt"></i>
+                <span>Salesforce Certified - Flashcards Challenge</span>
+            </div>
+
+            <!-- Language Toggle Switch (Ligar/Desligar) -->
+            <div class="language-toggle" onclick="toggleLanguage()" id="lang-switch">
+                <button class="lang-btn active" id="btn-lang-pt">PT-BR</button>
+                <button class="lang-btn" id="btn-lang-en">EN</button>
+            </div>
+        </div>
+
+        <!-- Progress Indicator -->
+        <div class="progress-indicator">
+            <div class="progress-fill" id="progress"></div>
+        </div>
+
+        <!-- HUD Statistics -->
+        <div class="hud-dashboard">
+            <div class="hud-card">
+                <span class="hud-label" id="lbl-score">Pontuação</span>
+                <span class="hud-value score-txt" id="score">0</span>
+            </div>
+            <div class="hud-card">
+                <span class="hud-label" id="lbl-timer">Tempo</span>
+                <span class="hud-value timer-txt" id="timer">15s</span>
+            </div>
+            <div class="hud-card">
+                <span class="hud-label" id="lbl-lives">Vidas</span>
+                <div class="lives-container" id="lives">❤️❤️❤️</div>
+            </div>
+        </div>
+
+        <!-- Combo Multiplier indicator -->
+        <div class="combo-container">
+            <div class="combo-badge" id="combo-badge">Combo 2x Ativo!</div>
+        </div>
+
+        <!-- Active Flashcard -->
+        <div class="card-viewports">
+            <div class="card-rotator" id="card" onclick="flipCard()">
+                <!-- Front Side -->
+                <div class="card-face face-front">
+                    <div class="card-header-info">
+                        <span class="tag-category" id="card-category">Categoria</span>
+                        <span class="card-counter" id="card-index">1/60</span>
+                    </div>
+                    <div class="question-body" id="card-question">Carregando pergunta de alta intensidade...</div>
+                    <div class="flip-hint-bar">
+                        <span id="txt-flip-hint">Clique para revelar a resposta</span>
+                        <i class="fa-solid fa-arrow-right-rotate"></i>
+                    </div>
+                </div>
+                <!-- Back Side -->
+                <div class="card-face face-back">
+                    <div class="card-header-info">
+                        <span class="tag-category" id="lbl-answer-tag">Resposta</span>
+                    </div>
+                    <div class="question-body" id="card-answer">Carregando resposta da validação...</div>
+                    <div class="flip-hint-bar">
+                        <span id="txt-rating-hint">Avalie sua resposta abaixo</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions Panel -->
+        <div class="action-pane" id="controls">
+            <button class="btn-action btn-incorrect" onclick="handleAnswer(false)">
+                <i class="fa-solid fa-circle-xmark"></i>
+                <span id="btn-lbl-wrong">Errei</span>
+            </button>
+            <button class="btn-action btn-correct" onclick="handleAnswer(true)">
+                <i class="fa-solid fa-circle-check"></i>
+                <span id="btn-lbl-right">Acertei</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Overlay Screens -->
+    <!-- Paused Screen -->
+    <div class="full-overlay" id="screen-paused">
+        <div class="overlay-icon icon-pause"><i class="fa-solid fa-circle-pause"></i></div>
+        <h2 class="overlay-title" id="pause-title">Jogo Pausado</h2>
+        <p class="overlay-desc" id="pause-desc">O idioma foi alterado! Aproveite para respirar. Clique no botão abaixo
+            para retomar o desafio de onde parou.</p>
+        <button class="btn-prime" onclick="resumeGame()" id="btn-resume">Retomar Desafio</button>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div class="full-overlay" id="screen-game-over">
+        <div class="overlay-icon icon-lost"><i class="fa-solid fa-skull-crossbones"></i></div>
+        <h2 class="overlay-title" id="lost-title">Fim de Jogo</h2>
+        <p class="overlay-desc" id="lost-desc">As vidas acabaram! Estude os conceitos chaves de segurança (OWDs, Perfis,
+            Regras de Compartilhamento) antes de tentar novamente.</p>
+        <div class="stats-summary">
+            <span class="hud-label" id="lbl-final-score-lost">Pontuação Final</span>
+            <span class="hud-value score-txt" id="final-score-lost">0</span>
+        </div>
+        <button class="btn-prime" onclick="resetGame()" id="btn-restart">Tentar Novamente</button>
+    </div>
+
+    <!-- Victory Screen -->
+    <div class="full-overlay" id="screen-victory">
+        <div class="overlay-icon icon-won"><i class="fa-solid fa-trophy"></i></div>
+        <h2 class="overlay-title" id="win-title">Excelente! 🎓</h2>
+        <p class="overlay-desc" id="win-desc">Você completou o deck intensivo de 60 questões! Você está preparadíssimo
+            para encarar o exame oficial de Administrador Salesforce.</p>
+        <div class="stats-summary">
+            <span class="hud-label" id="lbl-final-score-won">Pontuação Final</span>
+            <span class="hud-value score-txt" id="final-score-won">0</span>
+        </div>
+        <button class="btn-prime" onclick="resetGame()" id="btn-play-again">Jogar Novamente</button>
+    </div>
+
+    <script src="assets/js/script.js"></script>
+</body>
+
+</html>
