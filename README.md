@@ -38,7 +38,7 @@ As mais de 60 questões estão distribuídas estrategicamente pelas seguintes á
 Não requer instalação, servidor local ou banco de dados externo.
 
 1. Baixe (ou clone) o repositório;
-2. Dê um duplo clique no arquivo `salesforce_flashcards_game.html` para abri-lo em qualquer navegador moderno;
+2. Dê um duplo clique no arquivo `index.html` para abri-lo em qualquer navegador moderno;
 3. O jogo iniciará automaticamente.
 
 > ✅ Compatível com Google Chrome, Mozilla Firefox, Microsoft Edge e Safari.
